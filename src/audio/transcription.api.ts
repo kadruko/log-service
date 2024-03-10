@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import FormData from 'form-data';
+import * as FormData from 'form-data';
 import { readFileSync } from 'fs';
 import { basename } from 'path';
 import { firstValueFrom } from 'rxjs';
@@ -17,7 +17,7 @@ export class TranscriptionApi {
     const fileName = basename(file.path);
     const buffer = readFileSync(file.path);
     formData.append('audio', buffer, fileName);
-    const dto = await firstValueFrom(
+    const response = await firstValueFrom(
       this.httpService.post<TranscriptionDto>(
         `${TranscriptionApi.BASE_URL}/transcriptions`,
         formData,
@@ -28,6 +28,7 @@ export class TranscriptionApi {
         },
       ),
     );
+    const dto = response.data;
     return dto;
   }
 }
