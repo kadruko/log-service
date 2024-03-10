@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { rmSync } from 'fs';
 import { LogDao } from '../database/dao/log.dao';
 import { Log } from '../log/log';
 import { LogCreateDto } from '../log/log.create.dto';
@@ -41,5 +42,7 @@ export class AudioService {
     log.text = transcriptionDto.text;
     log.status = LogStatus.COMPLETED;
     log = await this.logDao.save(log);
+
+    rmSync(file.path);
   }
 }
