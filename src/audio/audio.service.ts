@@ -37,12 +37,12 @@ export class AudioService {
     } catch (error) {
       await this.logDao.setStatus(log.id, LogStatus.FAILED);
       throw error;
+    } finally {
+      rmSync(file.path);
     }
 
     log.text = transcriptionDto.text;
     log.status = LogStatus.COMPLETED;
     log = await this.logDao.save(log);
-
-    rmSync(file.path);
   }
 }

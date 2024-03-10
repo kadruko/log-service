@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 import { LogStatus } from './log.status';
 
-@Entity()
+@Entity('log')
 export class Log {
   @PrimaryGeneratedColumn('uuid')
   id: string;
