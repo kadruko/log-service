@@ -12,7 +12,7 @@ export class LogService {
 
   async getAll(queryDto: LogQueryDto) {
     const logs = await this.dao.getAll(queryDto);
-    return logs.map((log) => this.mapper.toDto(log));
+    return logs.map((log) => this.mapper.toDto(log, queryDto));
   }
 
   async deleteAll() {

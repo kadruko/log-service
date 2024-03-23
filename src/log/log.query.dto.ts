@@ -5,6 +5,9 @@ export class LogQueryDto {
   search?: string;
 
   @ApiPropertyOptional()
+  select?: string = 'id,text,timestamp,status,createdAt';
+
+  @ApiPropertyOptional()
   limit?: number;
 
   @ApiPropertyOptional()
