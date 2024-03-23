@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Query } from '@nestjs/common';
 import { LogQueryDto } from './log.query.dto';
 import { LogService } from './log.service';
 
@@ -9,5 +9,10 @@ export class LogController {
   @Get()
   getAll(@Query() queryDto: LogQueryDto) {
     return this.service.getAll(queryDto);
+  }
+
+  @Delete()
+  deleteAll() {
+    return this.service.deleteAll();
   }
 }

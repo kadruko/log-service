@@ -14,4 +14,8 @@ export class LogService {
     const logs = await this.dao.getAll(queryDto);
     return logs.map((log) => this.mapper.toDto(log));
   }
+
+  async deleteAll() {
+    return this.dao.deleteAll();
+  }
 }

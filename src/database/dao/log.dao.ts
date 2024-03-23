@@ -33,4 +33,8 @@ export class LogDao {
   async setStatus(id: string, status: LogStatus): Promise<void> {
     await this.repository.update(id, { status });
   }
+
+  async deleteAll(): Promise<void> {
+    await this.repository.delete({});
+  }
 }
