@@ -5,17 +5,11 @@ export class LogQueryDto {
   search?: string;
 
   @ApiPropertyOptional()
-  select?: string;
+  select?: string = 'id,text,timestamp,status,createdAt';
 
   @ApiPropertyOptional()
   limit?: number;
 
   @ApiPropertyOptional()
   offset?: number;
-
-  constructor() {
-    if (!this.select) {
-      this.select = 'id,text,timestamp,status,createdAt';
-    }
-  }
 }

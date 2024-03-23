@@ -4,6 +4,7 @@ import { LogDao } from '../database/dao/log.dao';
 import { Log } from '../log/log';
 import { LogCreateDto } from '../log/log.create.dto';
 import { LogMapper } from '../log/log.mapper';
+import { LogQueryDto } from '../log/log.query.dto';
 import { LogStatus } from '../log/log.status';
 import { TranscriptionApi } from './transcription.api';
 import { TranscriptionDto } from './transcription.dto';
@@ -24,7 +25,8 @@ export class AudioService {
 
     this.process(file, log);
 
-    const dto = this.logMapper.toDto(log);
+    const queryDto = new LogQueryDto();
+    const dto = this.logMapper.toDto(log, queryDto);
     return dto;
   }
 
