@@ -8,7 +8,7 @@ import { TranscriptionDto } from './transcription.dto';
 
 @Injectable()
 export class TranscriptionApi {
-  private static readonly BASE_URL = 'http://89.58.29.139:5010';
+  private static readonly BASE_URL = 'http://89.58.29.139:5011';
 
   constructor(private readonly httpService: HttpService) {}
 
