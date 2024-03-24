@@ -7,19 +7,19 @@ import { LogQueryDto } from './log.query.dto';
 export class LogMapper {
   toDto(log: Log, queryDto: LogQueryDto): LogDto {
     const dto = new LogDto();
-    if (queryDto.select.replace(' ', '').split(',').includes('id')) {
+    if (queryDto.isSelected('id')) {
       dto.id = log.id;
     }
-    if (queryDto.select.replace(' ', '').split(',').includes('text')) {
+    if (queryDto.isSelected('text')) {
       dto.text = log.text;
     }
-    if (queryDto.select.replace(' ', '').split(',').includes('timestamp')) {
+    if (queryDto.isSelected('timestamp')) {
       dto.timestamp = log.timestamp;
     }
-    if (queryDto.select.replace(' ', '').split(',').includes('status')) {
+    if (queryDto.isSelected('status')) {
       dto.status = log.status;
     }
-    if (queryDto.select.replace(' ', '').split(',').includes('createdAt')) {
+    if (queryDto.isSelected('createdAt')) {
       dto.createdAt = log.createdAt;
     }
     return dto;

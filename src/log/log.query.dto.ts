@@ -5,11 +5,16 @@ export class LogQueryDto {
   search?: string;
 
   @ApiPropertyOptional()
-  select?: string = 'id,text,timestamp,status,createdAt';
+  select: string = '*';
 
   @ApiPropertyOptional()
   limit?: number;
 
   @ApiPropertyOptional()
   offset?: number;
+
+  isSelected(field: string): boolean {
+    const fields = this.select.replace(' ', '').split(',');
+    return fields.includes(field) || fields.includes('*');
+  }
 }
