@@ -16,11 +16,21 @@ export class LogDao {
     const query = this.repository
       .createQueryBuilder('log')
       .orderBy('timestamp', 'DESC')
-      .skip(queryDto.limit || 0)
-      .take(queryDto.offset || 100);
+      .skip(queryDto.offset)
+      .take(queryDto.limit);
 
     if (queryDto.search) {
       query.where('text ILIKE :search', { search: `%${queryDto.search}%` });
+    }
+    if (queryDto.getStartTimestamp()) {
+      query.andWhere('timestamp >= :startTimestamp', {
+        startTimestamp: queryDto.getStartTimestamp(),
+      });
+    }
+    if (queryDto.getEndTimestamp()) {
+      query.andWhere('timestamp <= :endTimestamp', {
+        endTimestamp: queryDto.getEndTimestamp(),
+      });
     }
 
     return query.getMany();
