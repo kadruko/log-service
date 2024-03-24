@@ -4,7 +4,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { LogStatus } from './log.status';
 
 @Entity('log')
 export class Log {
@@ -16,9 +15,6 @@ export class Log {
 
   @Column()
   timestamp: Date;
-
-  @Column()
-  status: LogStatus;
 
   @CreateDateColumn()
   createdAt: Date;

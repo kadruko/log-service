@@ -1,4 +1,12 @@
 export class TranscriptionDto {
+  speaker: string;
+  content: TranscriptionContentDto;
+  start: number;
+  end: number;
+  embedding: number[];
+}
+
+export class TranscriptionContentDto {
   text: string;
   segments: TranscriptionSegmentDto[];
   language: string;

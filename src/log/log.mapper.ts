@@ -16,9 +16,6 @@ export class LogMapper {
     if (queryDto.isSelected('timestamp')) {
       dto.timestamp = log.timestamp;
     }
-    if (queryDto.isSelected('status')) {
-      dto.status = log.status;
-    }
     if (queryDto.isSelected('createdAt')) {
       dto.createdAt = log.createdAt;
     }

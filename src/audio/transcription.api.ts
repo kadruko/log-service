@@ -17,8 +17,9 @@ export class TranscriptionApi {
     const fileName = basename(file.path);
     const buffer = readFileSync(file.path);
     formData.append('audio', buffer, fileName);
+    formData.append('features', 'speaker,embedding');
     const response = await firstValueFrom(
-      this.httpService.post<TranscriptionDto>(
+      this.httpService.post<TranscriptionDto[]>(
         `${TranscriptionApi.BASE_URL}/transcriptions`,
         formData,
         {
