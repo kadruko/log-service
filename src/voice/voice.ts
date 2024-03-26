@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ColumnType } from 'typeorm/driver/types/ColumnTypes';
+import { WithLengthColumnType } from 'typeorm/driver/types/ColumnTypes';
 import { Log } from '../log/log';
 
 @Entity()
@@ -10,7 +10,7 @@ export class Voice {
   @Column({ nullable: true })
   name?: string | null;
 
-  @Column({ type: 'vector' as ColumnType })
+  @Column('vector' as WithLengthColumnType, { length: 256 })
   embedding: string | number[];
 
   @OneToMany(() => Log, (log) => log.voice)
