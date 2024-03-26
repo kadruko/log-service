@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { VoiceDto } from '../voice/voice.dto';
 
 export class LogDto {
   @ApiProperty()
@@ -12,4 +13,7 @@ export class LogDto {
 
   @ApiProperty()
   createdAt: Date;
+
+  @ApiProperty()
+  voice: VoiceDto;
 }

@@ -14,20 +14,21 @@ export class LogDao {
   async getAll(queryDto: LogQueryDto): Promise<Log[]> {
     const query = this.repository
       .createQueryBuilder('log')
-      .orderBy('timestamp', 'DESC')
+      .leftJoinAndSelect('log.voice', 'voice', 'log.voiceId = voice.id')
+      .orderBy('log.timestamp', 'DESC')
       .skip(queryDto.offset)
       .take(queryDto.limit);
 
     if (queryDto.search) {
-      query.where('text ILIKE :search', { search: `%${queryDto.search}%` });
+      query.where('log.text ILIKE :search', { search: `%${queryDto.search}%` });
     }
     if (queryDto.getStartTimestamp()) {
-      query.andWhere('timestamp >= :startTimestamp', {
+      query.andWhere('log.timestamp >= :startTimestamp', {
         startTimestamp: queryDto.getStartTimestamp(),
       });
     }
     if (queryDto.getEndTimestamp()) {
-      query.andWhere('timestamp <= :endTimestamp', {
+      query.andWhere('log.timestamp <= :endTimestamp', {
         endTimestamp: queryDto.getEndTimestamp(),
       });
     }
