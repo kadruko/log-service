@@ -47,4 +47,5 @@ jobs:
             git status
             npm ci
             npm run build
+            npm run up
             pm2 restart log-service-${{ inputs.environment }} --update-env

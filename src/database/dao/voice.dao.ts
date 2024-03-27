@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { toSql } from 'pgvector';
 import { Repository } from 'typeorm';
@@ -13,8 +13,15 @@ export class VoiceDao {
   ) {}
 
   async save(voice: Voice): Promise<Voice> {
-    voice.embedding = toSql(voice.embedding);
     return this.repository.save(voice);
+  }
+
+  async get(id: string): Promise<Voice> {
+    const voice = await this.repository.findOneBy({ id });
+    if (!voice) {
+      throw new BadRequestException(`Voice with id '${id}' was not found.`);
+    }
+    return voice;
   }
 
   async findClosest(embedding: number[]): Promise<VoiceResult | null> {
