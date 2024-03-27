@@ -16,6 +16,9 @@ export class LogQueryDto {
   @ApiPropertyOptional()
   timestamp?: string | string[];
 
+  @ApiPropertyOptional()
+  'voice.name'?: string;
+
   isSelected(field: string): boolean {
     const fields = this.select.replace(' ', '').split(',');
     return fields.includes(field) || fields.includes('*');

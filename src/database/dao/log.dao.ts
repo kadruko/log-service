@@ -32,6 +32,11 @@ export class LogDao {
         endTimestamp: queryDto.getEndTimestamp(),
       });
     }
+    if (queryDto['voice.name']) {
+      query.andWhere('LOWER(voice.name) = LOWER(:voiceName)', {
+        voiceName: queryDto['voice.name'],
+      });
+    }
 
     return query.getMany();
   }
