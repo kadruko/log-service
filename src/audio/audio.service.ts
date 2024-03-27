@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { rmSync } from 'fs';
 import { LogDao } from '../database/dao/log.dao';
 import { VoiceDao } from '../database/dao/voice.dao';
 import { Log } from '../log/log';
@@ -27,7 +26,7 @@ export class AudioService {
     } catch (error) {
       throw error;
     } finally {
-      rmSync(file.path);
+      // rmSync(file.path); - keep audio files for now
     }
 
     for (const transcriptionDto of transcriptionDtos) {
