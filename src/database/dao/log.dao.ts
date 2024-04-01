@@ -48,4 +48,14 @@ export class LogDao {
   async deleteAll(): Promise<void> {
     await this.repository.delete({});
   }
+
+  async getLatestBefore(timestamp: Date): Promise<Log> {
+    return this.repository
+      .createQueryBuilder('log')
+      .leftJoinAndSelect('log.voice', 'voice', 'log.voiceId = voice.id')
+      .where('log.timestamp < :timestamp', { timestamp })
+      .orderBy('log.timestamp', 'DESC')
+      .take(1)
+      .getOne();
+  }
 }
