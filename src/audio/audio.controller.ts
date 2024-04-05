@@ -34,7 +34,7 @@ export class AudioController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 1000 * 1000 * 1000 }), // 1gb
+          new MaxFileSizeValidator({ maxSize: 10 * 1024 * 1024 }), // 10mb
         ],
       }),
     )
